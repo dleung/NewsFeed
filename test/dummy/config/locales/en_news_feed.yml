@@ -1,0 +1,4 @@
+en:
+  news_feeds: 
+    create_object: "%{actor} created a %{object_class}: %{object_name}" 
+      
