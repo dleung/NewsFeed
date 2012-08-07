@@ -10,6 +10,17 @@ module NewsFeed
       when :Create
           I18n.t('news_feeds.create_object', actor: actor_name.to_s, object_class: object_class,
           object_name: object_title)
+      when :Update
+          I18n.t('news_feeds.update_object', actor: actor_name.to_s, object_class: object_class,
+          object_name: object_title)
+      when :Delete
+          I18n.t('news_feeds.delete_object', actor: actor_name.to_s, object_class: object_class,
+          object_name: object_title)
+      when :Send
+          I18n.t('news_feeds.send_object', actor: actor_name.to_s, object_class: object_class,
+          object_name: object_title, recipient_name: recipient_name)
+      else
+        raise "event_name is undefined"
       end
       
 

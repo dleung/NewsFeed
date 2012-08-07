@@ -23,6 +23,7 @@ ActiveRecord::Schema.define(:version => 20120807021300) do
     t.integer  "object_id"
     t.string   "object_type"
     t.string   "event_type"
+    t.integer  "sender_id"
     t.datetime "timestamp"
   end
 
@@ -32,7 +33,11 @@ ActiveRecord::Schema.define(:version => 20120807021300) do
     t.string   "object_type"
     t.string   "event_type"
     t.integer  "sender_id"
-    t.datetime "timestamp"
+    t.integer  "sender_type"
+    t.integer  "recipient_id"
+    t.string   "recipient_type"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
   end
 
   create_table "users", :force => true do |t|

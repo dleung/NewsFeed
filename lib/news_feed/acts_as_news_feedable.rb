@@ -8,6 +8,8 @@ module NewsFeed
       cattr_accessor :object_name
       self.object_name = options[:object_name]
       
+      has_many :news_feed_events, foreign_key: 'recipient_id', dependent: :delete_all
+      
       include NewsFeedInstanceMethods
       include NewsFeedEvents
     end
@@ -28,18 +30,19 @@ module NewsFeed
           object_title =  self.object_name 
         end
         text = generate_text(event_name, actor_name(actor, recipient), object_class, 
-        object_title, recipient_name(recipient))
+        object_title, recipient_name(actor, recipient))
         
         options = {
           text: text,
-          object_class: self.class.name,
-          object_id: self.id,
           object_type: self.class.name,
+          object_id: self.id,
           event_type: event_name,
-          sender_id: actor.id
+          sender_id: actor.id,
+          sender_type: actor.class.name,
+          recipient_id: recipient.id,
+          recipient_type: recipient.class.name
         }
-        
-        NewsFeedEvents.create!(options)
+        NewsFeedEvent.create!(options)
       end
     end
     
@@ -51,11 +54,11 @@ module NewsFeed
       end      
     end
     
-    def recipient_name(recipient)
-      if recipient.object_name.blank?
-        nil
+    def recipient_name(actor,recipient)
+      if recipient != actor
+        "you"
       else
-        recipient.object_name
+        recipient.object_name.to_s
       end
     end
     

@@ -7,7 +7,10 @@ class InsertNewsFeedEvents < ActiveRecord::Migration
       t.string :object_type
       t.string :event_type
       t.integer :sender_id
-      t.datetime :timestamp
+      t.integer :sender_type
+      t.integer :recipient_id
+      t.string :recipient_type
+      t.timestamps
     end
   end
 
