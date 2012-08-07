@@ -1,0 +1,12 @@
+gemfile:
+  - gemfiles/Gemfile.rails-3.1.x
+  - Gemfile
+notifications:
+  recipients:
+    - dleung@quosap.com
+rvm:
+  - 1.9.2
+  - 1.9.3
+script: "rake db:migrate"
+script: "rake db:test:prepare"
+script: "rake"
