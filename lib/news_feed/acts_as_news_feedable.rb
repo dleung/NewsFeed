@@ -35,8 +35,8 @@ module NewsFeed
         
         options = {
           text: text,
-          object_type: self.class.name,
-          object_id: self.id,
+          event_object_type: self.class.name,
+          event_object_id: self.id,
           event_type: event_name,
           sender_id: actor.id,
           sender_type: actor.class.name,
