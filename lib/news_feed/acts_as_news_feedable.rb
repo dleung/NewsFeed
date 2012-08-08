@@ -11,6 +11,7 @@ module NewsFeed
       has_many :news_feed_events, foreign_key: 'recipient_id', dependent: :delete_all
       
       include NewsFeedInstanceMethods
+      require Rails.root.join('lib/news_feed/news_feed_events')
       include NewsFeedEvents
     end
   end
