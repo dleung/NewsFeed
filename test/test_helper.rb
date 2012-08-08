@@ -45,7 +45,7 @@ ActiveRecord::Schema.define(:version => 1) do
   end
 end
 
-# Load support files
+# Load support files #
 Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each { |f| require f }
 
 
