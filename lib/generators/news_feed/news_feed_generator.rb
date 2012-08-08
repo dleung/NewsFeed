@@ -1,7 +1,7 @@
 module NewsFeed
   module Generators
     class InstallGenerator < Rails::Generators::Base  
-      source_root File.expand_path('../templates', __FILE__)
+      source_root File.expand_path('..', __FILE__)
       
       desc "Copies the news feed locale file and news feed event file to your application"
       
