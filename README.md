@@ -5,9 +5,9 @@
 This module will allow users to send and receive NewsFeed activities related to actions that are either predefined or custom-created.
 
 ## Usage
-For example:  A news feed item is generated for creating a message
+For example:  A news feed item is generated for creating a message.  By default, this module comes with several message templates.
 ```
-message.insertNewsFeed(Create, user_1, current_user)
+message.insertNewsFeed(:Create, user_1, current_user)
 # Creates a news_feed in the database with text "Bob Smith has created a Message" that is sent to user_1.  
 # The text can be customized, as well as the recipients.
 ```
