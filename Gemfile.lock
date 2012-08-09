@@ -1,8 +1,9 @@
 PATH
   remote: .
   specs:
-    news_feed (0.0.2)
+    news_feed (0.0.3)
       rails (~> 3.2.3)
+      sqlite3
 
 GEM
   remote: http://rubygems.org/
@@ -90,4 +91,3 @@ PLATFORMS
 
 DEPENDENCIES
   news_feed!
-  sqlite3
