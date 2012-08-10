@@ -33,7 +33,6 @@ module NewsFeed
         
         text = generate_text(event_name, actor_name(actor, recipient), object_class, 
         object_title, recipient_name(actor, recipient), options)
-        
         event_options = {
           text: text,
           event_object_type: self.class.name,
@@ -60,7 +59,7 @@ module NewsFeed
       if recipient != actor
         "you"
       else
-        recipient.object_name.to_s
+        "yourself"
       end
     end
     
