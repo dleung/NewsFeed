@@ -30,10 +30,11 @@ module NewsFeed
         if self.object_name.present?
           object_title =  self.object_name 
         end
-        text = generate_text(event_name, actor_name(actor, recipient), object_class, 
-        object_title, recipient_name(actor, recipient))
         
-        options = {
+        text = generate_text(event_name, actor_name(actor, recipient), object_class, 
+        object_title, recipient_name(actor, recipient), options)
+        
+        event_options = {
           text: text,
           event_object_type: self.class.name,
           event_object_id: self.id,
@@ -43,7 +44,7 @@ module NewsFeed
           recipient_id: recipient.id,
           recipient_type: recipient.class.name
         }
-        NewsFeedEvent.create!(options)
+        NewsFeedEvent.create!(event_options)
       end
     end
     

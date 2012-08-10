@@ -4,4 +4,8 @@ class NewsFeedEvent < ActiveRecord::Base
     :sender_id, :sender_type, :recipient_id, :recipient_type
   
   validates_presence_of :recipient_id, :recipient_type
+  
+  def event_type_object
+    event_type.to_s + event_object_type.to_s 
+  end
 end

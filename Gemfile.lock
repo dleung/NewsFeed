@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    news_feed (0.0.3)
+    news_feed (0.0.4)
       rails (~> 3.2.3)
       sqlite3
 
