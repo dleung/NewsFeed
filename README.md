@@ -57,16 +57,25 @@ Include 'acts_as_news_feedable' in the following models:
 1.  Class that you want a list of news_feed_events.
 2.  Class that that you want to call news_feed_events on.
 
-**Pass in the object name when defining acts_as_news_feedable.**  The object name will be used to generate the name of the subject, like a user's full name or a message title.
+**Pass in the news_feed_object_name as a separate definition when defining acts_as_news_feedable.**  The object name will be used to generate the name of the subject, like a user's full name or a message title, per instance.
 
 ```ruby
 # In both classes you can call either user.news_feed_events or user.insertNewsFeed
 class User
-  acts_as_news_feedable object_name: "Bob Smith"
+  acts_as_news_feedable
+  
+  def news_feed_object_name
+    "Bob Smith"
+  end
+  
 end
 
 class Message
   acts_as_news_feedable object_name: "Message Title"
+  
+  def news_feed_object_name
+    "Message Title"
+  end
 end
 ```
 
