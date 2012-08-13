@@ -2,13 +2,13 @@ require 'test_helper'
 
 class NewsFeedTest < Test::Unit::TestCase
   def test_to_get_user_name
-    user = User.new
-    assert_equal "Bob Smith", user.object_name
+    user = User.new(name: 'Bob Smith')
+    assert_equal "Bob Smith", user.news_feed_object_name
   end
 
   def test_for_creating_a_new_object
-    user_1 = User.create
-    current_user = User.create
+    user_1 = User.create(name: 'Billy Jones')
+    current_user = User.create(name: 'Bob Smith')
     message = Message.create
     message.insertNewsFeed(:Create, user_1, current_user)
     news_feed_event = user_1.news_feed_events.last
@@ -25,8 +25,8 @@ class NewsFeedTest < Test::Unit::TestCase
   end
 
   def test_for_updating_and_sending_self_an_object
-    user_1 = User.create
-    current_user = User.create
+    user_recipient = User.create(name: 'Billy Jones')
+    current_user = User.create(name: 'Bob Smith')
     message = Message.create
     current_user.insertNewsFeed(:Update, current_user, current_user)
     news_feed_event = current_user.news_feed_events.last
@@ -41,8 +41,8 @@ class NewsFeedTest < Test::Unit::TestCase
   end
 
   def test_for_delete_an_object_sent_to_multiple_recipients
-    user_1 = User.create
-    current_user = User.create
+    user_1 = User.create(name: 'Billy Jones')
+    current_user = User.create(name: 'Bob Smith')
     message = Message.create
     message.insertNewsFeed(:Delete, user_1, current_user)
     news_feed_event = user_1.news_feed_events.last
@@ -57,8 +57,8 @@ class NewsFeedTest < Test::Unit::TestCase
   end
   
   def test_for_multiple_news_feeds
-    user_1 = User.create
-    current_user = User.create
+    user_1 = User.create(name: 'Billy Jones')
+    current_user = User.create(name: 'Bob Smith')
     message = Message.create
     message.insertNewsFeed(:Delete, user_1, current_user)
     message.insertNewsFeed(:Create, user_1, current_user)
@@ -66,8 +66,8 @@ class NewsFeedTest < Test::Unit::TestCase
   end
 
   def test_for_sending_an_object_to_multiple_recipients
-    user_1 = User.create
-    current_user = User.create
+    user_1 = User.create(name: 'Billy Jones')
+    current_user = User.create(name: 'Bob Smith')
     message = Message.create
     message.insertNewsFeed(:Send, [user_1, current_user], current_user)
     news_feed_event_1 = user_1.news_feed_events.last
@@ -91,8 +91,8 @@ class NewsFeedTest < Test::Unit::TestCase
   end
 
   def test_for_sending_an_object_to_multiple_recipients
-    user_1 = User.create
-    current_user = User.create
+    user_1 = User.create(name: 'Billy Jones')
+    current_user = User.create(name: 'Bob Smith')
     message = Message.create
     message.insertNewsFeed(:Custom, [user_1, current_user], current_user, "This is my custom message!")
     news_feed_event_1 = user_1.news_feed_events.last
@@ -115,12 +115,12 @@ class NewsFeedTest < Test::Unit::TestCase
   end
   
   def test_for_different_classes
-    user_recipient = User.create
-    current_user = User.create
+    user_recipient = User.create(name: 'Billy Jones')
+    current_user = User.create(name: 'Bob Smith')
     message = Message.create
     user_recipient.insertNewsFeed(:Create, user_recipient, user_recipient)
     news_feed_event_1 = user_recipient.news_feed_events.last
-    assert_equal news_feed_event_1.text, 'You have created a User: Bob Smith'
+    assert_equal news_feed_event_1.text, 'You have created a User: Billy Jones'
     assert_equal news_feed_event_1.event_type_object, 'CreateUser'
     assert_equal news_feed_event_1.event_object_type, 'User'
     assert_equal news_feed_event_1.event_type, 'Create'
@@ -131,8 +131,8 @@ class NewsFeedTest < Test::Unit::TestCase
   end
   
   def test_for_various_messages
-    user_recipient = User.create
-    current_user = User.create
+    user_recipient = User.create(name: 'Billy Jones')
+    current_user = User.create(name: 'Bob Smith')
     message = Message.create
     message.insertNewsFeed(:Create, user_recipient, current_user)
     news_feed_event_1 = user_recipient.news_feed_events.last

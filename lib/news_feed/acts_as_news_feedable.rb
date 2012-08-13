@@ -3,13 +3,10 @@ module NewsFeed
     base.extend ActsAsNewsFeedable
   end
   
+
   module ActsAsNewsFeedable
-    def acts_as_news_feedable(options = {})
-      cattr_accessor :object_name
-      self.object_name = options[:object_name]
-      
+    def acts_as_news_feedable
       has_many :news_feed_events, foreign_key: 'recipient_id', dependent: :delete_all
-      
       include NewsFeedInstanceMethods
       require Rails.root.join('lib/news_feed/news_feed_events')
       include NewsFeedEvents
@@ -23,12 +20,12 @@ module NewsFeed
       end
       recipients.each do |recipient|
 
-        if actor.object_name.blank?
-          raise "Actor name must be specified in the model"
+        unless self.respond_to?('news_feed_object_name')
+          raise "news_feed_object_name must be defined in model"
         end
 
-        if self.object_name.present?
-          object_title =  self.object_name 
+        if self.news_feed_object_name.present?
+          object_title =  self.news_feed_object_name 
         end
         
         text = generate_text(event_name, actor_name(actor, recipient), object_class, 
@@ -51,7 +48,7 @@ module NewsFeed
       if actor == recipient
         "You have"
       else
-        actor.object_name.to_s + " has"
+        actor.news_feed_object_name.to_s + " has"
       end      
     end
     
